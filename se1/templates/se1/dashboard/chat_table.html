@@ -1,0 +1,393 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+
+    <title>Chat Page</title>   
+	
+    <link rel="stylesheet" href="{% static 'se1/assets1/css/reset.css' %}">
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="{% static 'se1/assets1/css/chatstyle.css' %}">   
+    <style>
+.btn-info {
+  border-color: #1DC7EA;
+  color: #1DC7EA;
+}
+.btn-info.btn-fill1 {
+  color: #FFFFFF;
+  background-color: #59E817;
+  border-color: #59E817;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+</style>
+    <script type="text/javascript">
+
+    function send_msg()
+    {
+    
+    	msg=document.getElementById("message-to-send");
+    	text=msg.value;
+    	var dat = new Date();
+    	
+		chat_history_ul=document.getElementById("chat_history_ul");
+    	li=document.createElement("li");
+		li.className="clearfix";
+		
+		div1=document.createElement("div");
+		div1.className="message-data align-right";
+		
+		span1=document.createElement("span");
+		span1.className="message-data-time";
+		span1.innerHTML=dat;
+		div1.appendChild(span1);
+		
+		span2=document.createElement("span");
+		span2.className="message-data-name";
+		span2.innerHTML="name";
+		div1.appendChild(span2);
+		
+		i=document.createElement("i");
+		i.className="fa fa-circle me";
+		div1.appendChild(i);
+		
+		li.appendChild(div1);
+		
+		div2=document.createElement("div");
+		div2.className="message other-message float-right";
+                div2.id = "msgid2"
+		div2.innerHTML=text;
+		li.appendChild(div2);
+		chat_history_ul.appendChild(li);
+		msg.value="";
+		return true;
+    }
+    function display_msgs(json)
+	{
+         //console.log("hey"+json['dic'])
+        temp = json['dic'];
+       for(num1 = 0;num1<temp.length;++num1)
+        {
+ 		 obj = temp[num1];
+	         i = obj[0];
+                 j = obj[1];
+                 k = obj[2];
+		 l = obj[3];
+                 console.log(typeof(k),i,j,k,l,"happy");
+                 if(k=="right")
+                 {
+			                   
+			li=document.createElement("li");
+			li.className="clearfix";
+			
+			div1=document.createElement("div");
+			div1.className="message-data align-right";
+			
+			span1=document.createElement("span");
+			span1.className="message-data-time";
+			span1.innerHTML= l;
+                        span1.id = "msgid1";
+			div1.appendChild(span1);
+			
+			span2=document.createElement("span");
+			span2.className="message-data-name";
+			span2.innerHTML= i;
+			div1.appendChild(span2);
+			
+			i=document.createElement("i");
+			i.className="fa fa-circle me";
+			div1.appendChild(i);
+			
+			li.appendChild(div1);
+			
+			div2=document.createElement("div");
+			div2.className="message other-message float-right";
+			div2.innerHTML= j;
+			li.appendChild(div2);
+			chat_history_ul.appendChild(li);
+ 		 }
+		else
+		{	
+			li=document.createElement("li");
+			
+			div1=document.createElement("div");
+			div1.className="message-data";
+			
+			span1=document.createElement("span");
+			span1.className="message-data-name";
+			
+			i=document.createElement("i");
+			i.className="fa fa-circle online";
+			span1.appendChild(i);
+									
+			span1.innerHTML=span1.innerHTML+ i ;
+			div1.appendChild(span1);			
+			li.appendChild(div1);
+			
+			span2=document.createElement("span");
+			span2.className="message-data-time";
+			span2.innerHTML=l ;
+			div1.appendChild(span2);
+			
+			div2=document.createElement("div");
+			div2.className="message my-message";
+			div2.innerHTML=j;
+			li.appendChild(div2);
+			chat_history_ul.appendChild(li);	
+		}
+
+       }
+        
+	num=0;
+        
+	number=document.getElementById("chat-num-messages");
+	number.innerHTML="Hello 120";
+
+        
+	}
+	  function display_msgs1()
+	{
+	num=0;
+        console.log("workin")
+	number=document.getElementById("chat-num-messages");
+	//number.innerHTML="Hello 120";
+	//chat_history_ul=document.getElementById("chat_history_ul");
+	{% for i,j,k,l in dic %}
+		if ("{{k}}" == "right")
+		{
+			li=document.createElement("li");
+			li.className="clearfix";
+			
+			div1=document.createElement("div");
+			div1.className="message-data align-right";
+			
+			span1=document.createElement("span");
+			span1.className="message-data-time";
+			span1.innerHTML="{{ l }}";
+			div1.appendChild(span1);
+			
+			span2=document.createElement("span");
+			span2.className="message-data-name";
+			span2.innerHTML="{{ i }} ";
+			div1.appendChild(span2);
+			
+			i=document.createElement("i");
+			i.className="fa fa-circle me";
+			div1.appendChild(i);
+			
+			li.appendChild(div1);
+			
+			div2=document.createElement("div");
+			div2.className="message other-message float-right";
+			div2.innerHTML="{{ j }}";
+			li.appendChild(div2);
+			chat_history_ul.appendChild(li);
+		}
+		else
+		{
+			li=document.createElement("li");
+			
+			div1=document.createElement("div");
+			div1.className="message-data";
+			
+			span1=document.createElement("span");
+			span1.className="message-data-name";
+			
+			i=document.createElement("i");
+			i.className="fa fa-circle online";
+			span1.appendChild(i);
+									
+			span1.innerHTML=span1.innerHTML+"{{ l }}";
+			div1.appendChild(span1);			
+			li.appendChild(div1);
+			
+			span2=document.createElement("span");
+			span2.className="message-data-time";
+			span2.innerHTML="{{ i }}";
+			div1.appendChild(span2);
+			
+			div2=document.createElement("div");
+			div2.className="message my-message";
+			div2.innerHTML="{{ j }}";
+			li.appendChild(div2);
+			chat_history_ul.appendChild(li);	
+		}
+    {% endfor %}
+	}
+    
+    </script>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.8.2.js'></script>
+     <script type="text/javascript">
+        $(document).ready(function() {
+            $("#button").click(function() {
+                    var input_string = $("#message-to-send").val();
+                    console.log("FDsfds   "+input_string);
+                    $.ajax({
+                        url : "chat_table", 
+                        type : "POST",
+                        dataType: "json", 
+                        data : {
+                            client_response : input_string,
+                           
+                            },
+                        success :  function send_msg(s)
+        {
+      // display_msgs(json);
+        console.log("working"+s['name']);
+        //console.log(json['dic'])
+        name = s['name']
+    	msg=document.getElementById("message-to-send");
+    	text=msg.value;
+    	var dat = new Date();
+    	
+		chat_history_ul=document.getElementById("chat_history_ul");
+    	li=document.createElement("li");
+		li.className="clearfix";
+		
+		div1=document.createElement("div");
+		div1.className="message-data align-right";
+		
+		span1=document.createElement("span");
+		span1.className="message-data-time";
+		span1.innerHTML=dat;
+		div1.appendChild(span1);
+		
+		span2=document.createElement("span");
+		span2.className="message-data-name";
+		span2.innerHTML=name;
+		div1.appendChild(span2);
+		
+		i=document.createElement("i");
+		i.className="fa fa-circle me";
+		div1.appendChild(i);
+		
+		li.appendChild(div1);
+		
+		div2=document.createElement("div");
+		div2.className="message other-message float-right";
+                div2.id = "msgid2"
+		div2.innerHTML=text;
+		li.appendChild(div2);
+		chat_history_ul.appendChild(li);
+		msg.value="";
+                
+		//return false;
+    },
+                        error : function(xhr,errmsg,err) {
+                            alert(xhr.status + ": " + xhr.responseText);
+                        }
+                    });
+                    return false;
+            });
+        });
+</script>
+  	</head>
+  
+	<body onload="display_msgs1()" style="background:#444753">
+    	<div id="container" class="container clearfix" style="background:#444753">
+
+    		<div class="people-list" id="people-list" style="width:150px">
+      			<div class="search">
+
+		      	</div>
+      
+			    <!-- ul class="list">
+				<li class="clearfix">
+				  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
+				  <div class="about">
+				    <div class="name">Peyton Mckinney</div>
+				    <div class="status">
+				      <i class="fa fa-circle online"></i> online
+				    </div>
+				  </div>
+				</li>
+				</ul -->
+			</div>
+
+			<div id="chat" class="chat">
+				<div id="chat-header" class="chat-header clearfix">
+					<!-- img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" / -->
+					<div class="chat-about">
+					  	<div class="chat-with">Chat with Group Members</div>
+						<div id="chat-num-messages" class="chat-num-messages"></div>
+					</div>
+					<i class="fa fa-star"></i>
+				</div> <!-- end chat-header -->
+
+			  	<div id = "chat-history" class="chat-history">
+					<ul id="chat_history_ul">
+			  		<!-- li class="clearfix">
+						<div class="message-data align-right">
+					  		<span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
+					  		<span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+					  	</div>
+
+						<div class="message other-message float-right">
+						  Hi Vincent, how are you? How is the project coming along?
+						</div>
+			  		</li>
+
+				  	<li>
+						<div class="message-data">
+						  <span class="message-data-name"> Vincent</span>
+						  <span class="message-data-time">10:12 AM, Today</span>
+						</div>
+						<div class="message my-message">
+						  Are we meeting today? Project has been already finished and I have results to show you.
+						</div>
+			  		</li -->
+
+
+        			</ul>
+      			</div> <!-- end chat-history -->
+
+			  	<div class="chat-message clearfix">
+					<textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" style="border:1px solid grey" autofocus></textarea>
+					<!--  <button id="button" >Send</button> -->
+                        <form method="post" action="">
+				         <input  id="button" type="button" value="Send" style="float:right" class="btn btn-info btn-fill1" />
+                         <!-- input type="submit" name = "send" value="Send" style="float:right" class="btn btn-info btn-fill1"  / -->
+                        </form>
+      			</div> <!-- end chat-message -->
+
+    		</div> <!-- end chat -->
+
+		</div> <!-- end container -->
+
+
+
+
+
+		<!-- script id="message-template" type="text/x-handlebars-template">
+		  <li class="clearfix">
+			<div class="message-data align-right">
+			  <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
+			  <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+			</div>
+			<div class="message other-message float-right">
+			  {{messageOutput}}
+			</div>
+		  </li>
+		</script>
+
+		<script id="message-response-template" type="text/x-handlebars-template">
+		  <li>
+			<div class="message-data">
+			  <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+			  <span class="message-data-time">{{time}}, Today</span>
+			</div>
+			<div class="message my-message">
+			  {{response}}
+			</div>
+		  </li>
+		</script -->
+    	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
+		<script src="{% static 'se1/assets1/js/index.js' %}"></script>
+  </body>
+</html>

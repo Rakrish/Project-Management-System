@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Project Management System</title>
+	<style>
+		h1
+		{
+			color : white;
+			}
+	</style>
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+        
+	<link rel="stylesheet" href="{% static 'se1/assets/css/animate.css' %}">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="{% static 'se1/assets/css/style.css' %}">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+	<div class="container">
+	<center><h1>{{title}}</h1><center>	
+		
+		<div class="login-box" >
+			<div class="box-header">
+				<h2>Student</h2>
+			</div>
+			<button onClick="location.href = 'http://127.0.0.1:8000/pmsystem/index'">Sign In</button> 
+			<br/>
+			<!--a href="#"><p class="small">Forgot your password?</p></a -->
+		</div>
+		
+		<div class="login-box">
+			<div class="box-header">
+				<h2>Mentor</h2>
+			</div>
+			<button onClick="location.href='http://127.0.0.1:8000/pmsystem/index'">Sign In</button> 
+			<br/>
+			<!--a href="#"><p class="small">Forgot your password?</p></a -->
+		</div>
+			
+		<div class="login-box">
+			<div class="box-header">
+				<h2>Guest</h2>
+			</div>
+			<button onClick="location.href='http://127.0.0.1:8000/pmsystem/guest'">Click</button> 
+			<br/>
+			<!--a href="#"><p class="small">Forgot your password?</p></a -->
+		</div>
+        <label id="error"></label>
+        
+	</div>
+
+	</body>
+</html>

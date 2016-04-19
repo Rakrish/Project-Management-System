@@ -1,0 +1,271 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="{% static 'se1/assets/img/favicon.ico' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static 'se1/assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static 'se1/assets/css/animate.min.css' %}" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="{% static 'se1/assets/css/light-bootstrap-dashboard.css' %}" rel="stylesheet"/>
+
+
+   
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="{% static 'se1/assets/css/pe-icon-7-stroke.css' %}" rel="stylesheet" />
+</head>
+<body>
+
+   {{ x1 }}
+<div class="wrapper">
+    <div class="sidebar" data-color="red" data-image="{% static 'se1/assets/img/photo_bg.jpg' %}">
+
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+				<p>
+                 Project Tracker
+                </p>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+				  <li>
+                    <a href="add_project.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Add Project </p>
+                    </a>
+                </li>
+				<li class="active">
+                    <a href="table.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Previous Projects List</p>
+                    </a>
+                </li>
+                <li>
+                <li>
+                    <a href="notifications.html">
+                        <i class="pe-7s-bell"></i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div  style="background: black;" class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Previous Projects</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+
+
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                          <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret"></b>
+                                    <span class="notification">5</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+                                                <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    More
+                                    <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+								<li>
+									<a href="table1.html">
+										<i class="pe-7s-note2"></i>
+										<p>All Projects List</p>
+									</a>
+							    </li>
+								<li>
+									<a href="table2.html">
+										<i class="pe-7s-note2"></i>
+										<p>Previous Prof List</p>
+									</a>
+								</li>
+
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Completed Projects</h4>
+                                <!--p class="category">Here is a subtitle for this table</p-->
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <form class="form-signup" role="form" method="post" action="">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>ID</th>
+                                    	<th>Title</th>
+                                    	<th>Members</th>
+                                    	<th>Guide</th>
+                                    	<th>Grade</th>
+                                    </thead>
+                                    <tbody>
+                                        <!--tr>
+                                        	<td>1</td>
+                                        	<td>XYZ</td>
+                                        	<td>   <ul style="list-style-type:none">
+                                        			  <li>a</li>
+                                        			  <li>b</li>
+                                        			  <li>c</li>
+                                        		  </ul>
+                                            </td>
+                                        	<td>D</td>
+                                        	<td>Completed <br><button> EDIT</button> </td>
+                                        </tr>
+                                        <tr>
+                                        	<td>2</td>
+                                        	<td>ABC</td>
+                                        	<td>
+                                        		<ul style="list-style-type:none">
+                                        			  <li>x</li>
+                                        			  <li>y</li>
+                                        			  <li>z</li>
+                                        		 </ul>
+                                        	</td>
+                                        	<td>P</td>
+                                        	<td>Ongoing/Pending <br><button> EDIT</button></td>
+					</tr -->
+
+					<!--{% for	post1 in all2	%}
+					 <tr>
+						<td> {{ post1.projid }} </td>
+						<td> {{ post1.title }} </td>
+					 <tr>
+   					 {% endfor	%} -->
+
+
+                                        {% for i in final_previous_projs %}
+                                        	<tr>
+                                        	<td> {{i.0.projid}} </td>
+                                        	<!--<td><input class = "form-proj" type = "submit" name = "proj_name" value = "{{i.0.title}}" /></td>-->
+					        <td> {{i.0.title}}  
+                                        	<td> 
+                                        	<ul style="list-style-type:none">
+                                        {% for j in i.2 %}
+                                        		<li>{{j.usn}}</li>
+                                        {% endfor %}
+                                        	</ul>
+                                        	</td>
+                                          <td>
+                                        	<ul style="list-style-type:none">
+                                        {% for j in i.1 %}
+                                        		<li>{{j.name}}</li>
+                                        {% endfor %}
+                                        	</ul>
+                                        	</td>
+                                        	<td>
+                                        	<ul style="list-style-type:none">
+                                        {% for j in i.2 %}
+                                        		<li>{{j.grade}}</li>
+                                        {% endfor %}
+						<li><br><button class="btn btn-info btn-fill pull-left" type = "submit" name = "proj_name" value = "{{i.0.title}}">Check</button> </li>
+                                        	</ul>
+                                        	</td>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+  
+
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static 'se1/assets/js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static 'se1/assets/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static 'se1/assets/js/bootstrap-checkbox-radio-switch.js' %}"></script>
+
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static 'se1/assets/js/bootstrap-notify.js' %}"></script>
+
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="{% static 'se1/assets/js/light-bootstrap-dashboard.js' %}"></script>
+
+
+
+</html>

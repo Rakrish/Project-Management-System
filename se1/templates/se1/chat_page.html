@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+
+	</script>
+</head>
+
+<body >
+	<h1>Hello this is the Chat Page</h1><br/>
+	{{ user }}<br/>
+	{{ request.user }}<br/><br/>
+
+
+
+	<form submit method = "POST" action = "">{% csrf_token %}
+	<input type="text" name="cUser" id="cUser"></input><br/>
+	{{ form.as_p }}<br/>
+	<input type = "submit" value = "Ok" /><br/>
+	</form>
+
+	{% for x,y in dic.items %}
+	{{ x }} {{ y }}<br/>
+	{% endfor %}
+
+</body>
+</html>

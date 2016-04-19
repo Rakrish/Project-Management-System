@@ -1,0 +1,324 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="{% static 'se1/assets/img/favicon.ico' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static 'se1/assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static 'se1/assets/css/animate.min.css' %}" rel="stylesheet"/>
+    
+    <link href="{% static 'se1/assets/css/bootstrap-select.css' %}" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="{% static 'se1/assets/css/light-bootstrap-dashboard.css' %}" rel="stylesheet"/>
+
+    <link href="{% static 'se1/assets/css/bootstrap-select.min.css' %}" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="{% static 'se1/assets/css/bootstrap-tagsinput.css' %}">
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="{% static 'se1/assets/css/pe-icon-7-stroke.css' %}" rel="stylesheet" />
+</head>
+<style>
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+</style>
+<script>
+	i=0;
+	function init()
+	{
+		createRow();
+		a=document.getElementById("dd");
+		b=document.getElementById("status");
+		a.value=b.value;
+		c=document.getElementById("mentordd");
+		d=document.getElementById("mentor");
+		c.value=d.value;
+	}
+	function enableButton2() 
+	{
+            document.getElementById("view").disabled = false;
+        }
+	function getSelectValues(select) 
+	{
+	  	var result = [];
+		var options = select && select.options;
+		var opt;
+
+		for (var i=0, iLen=options.length; i<iLen; i++) 
+		{
+			opt = options[i];
+			if (opt.selected) 
+			{
+			      result.push(opt.value || opt.text);
+    			}
+  		}
+  		return result;
+	}
+	function select()
+	{
+		$(document).ready(function(){$('#dom').tagsinput('removeAll')});
+		dom=document.getElementById("dom");
+ 		el = document.getElementsByTagName('select')[0];
+		dom.innerHTML=getSelectValues(el);
+		dom.value=dom.innerHTML;
+		$(document).ready(function(){$('#dom').on('itemRemoved', function(event) 
+		{
+			var foo = event.item;
+			$('#choose_dom').find('[value="'+foo+'"]').prop('selected', false);
+			$('#choose_dom').selectpicker('refresh');
+		});});
+		tags();
+		
+		
+	}
+	function tags()
+	{	
+		domlist=dom.innerHTML.split(",");
+		if(domlist.length==1)
+		{
+			$(document).ready(function(){$('#dom').tagsinput('add',dom.innerHTML)});
+		}
+		
+		for(var i=0;i<domlist.length;i++)
+		{
+			$(document).ready(function(){$('#dom').tagsinput('add',domlist[i])});	
+		}
+
+		
+	}
+
+	function createRow()
+	{
+		row=document.createElement('tr');
+		var cell=document.createElement('td');
+		var inputType=document.createElement('input');
+		inputType.type='text';
+		inputType.className="form-control";
+		inputType.placeholder="Name";
+		inputType.required=true;
+                inputType.name="Name[]"
+		cell.appendChild(inputType);
+		row.appendChild(cell);
+		var cell=document.createElement('td');
+		var inputType=document.createElement('input');
+		inputType.type='text';
+		inputType.className="form-control";
+		inputType.placeholder="USN";
+                inputType.name="USN[]"
+		inputType.addEventListener("change",nameNusn,false);
+		inputType.required=true;
+		cell.style.padding="10px";
+		cell.appendChild(inputType);
+		row.appendChild(cell);		
+		var cell=document.createElement('td');
+		checkBox=document.createElement('input');
+		checkBox.type='image';
+		checkBox.id='select'+i++;
+		checkBox.src="{% static 'se1/assets/img/x.png' %}";
+		cell.style.padding="2px";
+		cell.appendChild(checkBox);
+		row.appendChild(cell);
+		table=document.getElementById('members');
+		table.appendChild(row);
+		checkBox.addEventListener("click",removeRows,false);
+	}
+	function removeRows()
+	{
+		    l=document.getElementById(this.id);
+		    r=l.parentNode.parentNode;
+		    table.removeChild(r);
+	}
+	function get()
+	{
+		a=document.getElementById("dd");
+		b=document.getElementById("status");
+		a.value=b.value;
+	}
+	function mentorget()
+	{
+		c=document.getElementById("mentordd");
+		d=document.getElementById("mentor");
+		//alert(getSelectValues(d));
+		c.value=getSelectValues(d);
+
+	}
+	function nameNusn()
+	{
+		e=document.getElementById("names");
+		f=document.getElementById("usns");
+		var nameValues = [];
+		$('input[name="Name[]"]').each(function() {
+    			nameValues.push($(this).val());
+		});
+		var usnValues = [];
+		$('input[name="USN[]"]').each(function() {
+    			usnValues.push($(this).val());
+		});
+		e.value=nameValues;
+		f.value=usnValues
+	}
+
+</script>
+<body onload='init()'>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="red" data-image="{% static 'se1/assets/img/photo_bg.jpg' %}">
+
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+        	<div class="sidebar-wrapper">
+            <div class="logo">
+				<p>
+                 Project Tracker
+                </p>
+            </div>
+
+            <ul class="nav">
+
+            </ul>
+    	</div>
+    </div>
+	    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div style="background: black;" class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Text Editor</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+ <form class="navbar-form pull-left" role="search" method = "post" action = "">
+            <div class="input-group">
+               <br>
+	</div>
+                      
+                    
+                        
+                    </ul >
+
+                    <ul class="nav navbar-nav navbar-right">
+                          <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret"></b>
+                                    <span class="notification">5</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    More
+                                    <b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                             <li>
+					<a href="table1.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>All Projects List</p>
+                    </a>
+                </li>
+				<li>
+					<a href="table2.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Previous Prof List</p>
+                    </a>
+                </li>
+                              </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+		{% if prof | guest %}
+		<div class="text-editor" align="center">
+			<textarea id="inputText" rows="40" cols="100" name="textdata" disabled>{{mydata}}</textarea>
+		</div>
+		{% else %}
+		<div align="center">
+			<label>Filename to save as (with Extension):</label>
+			<input id="saveFileName" name="filename"></input>
+			<input type="submit" class="btn btn-info btn-fill1" name="save" value="Save file"></td>
+		</div>
+		<div class="text-editor" align="center">
+			<textarea id="inputText" rows="40" cols="100" name="textdata">{{mydata}}</textarea>
+		</div>
+		{%endif%}
+                
+            </div>
+        </div>
+
+
+     
+    </div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static 'se1/assets/js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static 'se1/assets/js/bootstrap.min.js' %}" type="text/javascript"></script>
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static 'se1/assets/js/bootstrap-checkbox-radio-switch.js' %}"></script>
+
+	<script src="{% static 'se1/assets/js/bootstrap-select.js' %}" type="text/javascript"></script>
+<script src="{% static 'se1/assets/js/bootstrap-select.min.js' %}" type="text/javascript"></script>
+    <!--  Notifications Plugin    -->
+    <script src="{% static 'se1/assets/js/bootstrap-notify.js' %}"></script>
+<script src="{% static 'se1/assets/js/bootstrap-tagsinput.js' %}"></script>
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="{% static 'se1/assets/js/light-bootstrap-dashboard.js' %}"></script>
+        <!--script type="text/javascript" src="{% static 'se1/assets/js/WebContent/zip.js' %}"-->
+        <!--script type="text/javascript" src="{% static 'se1/assets/js/WebContent/rar.js' %}"-->	
+</html>

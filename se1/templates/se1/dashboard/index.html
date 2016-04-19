@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Project Management System</title>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+        
+	<link rel="stylesheet" href="{% static 'se1/assets/css/animate.css' %}">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="{% static 'se1/assets/css/style.css' %}">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script>
+        function init()
+        {
+            lab = document.getElementById("error");
+            {% if KEY == 1 %}
+                lab.style.color = "red";
+                lab.innerHTML = "Please check your values";
+            {% endif  %}
+        }
+    </script>
+</head>
+
+<body onload = "init()">
+	<div class="container">
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo">Project Management System </span></h1>
+		</div>
+		<form class="form-signup" role="form" method="post" action="">
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+				<h2>Log In</h2>
+                <label id="error"></label>
+			</div>
+			<label for="username" >Username</label>
+			<br/>
+			<input type="text" id="username"  name = "username" class="form-group" required autofocus>
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password"  name = "passwrd" class="form-group" required>
+			<br/>
+			<button type="submit">Sign In</button> 
+			<br/>
+			<!--a href="#"><p class="small">Forgot your password?</p></a -->
+		</div>
+		</form>
+
+	</div>
+
+</body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+
+</html>
